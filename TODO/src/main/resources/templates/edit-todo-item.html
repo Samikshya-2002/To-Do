@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" />
+
+    <style>
+        body{
+            background-color:linen;
+        }
+        h1{
+            background-color:linen;
+            text-align: center;
+            margin-top:50px;
+            margin-bottom:30px;
+        }
+        .col-6{
+            background-color:blanchedalmond;
+            margin-left:109px;
+        }
+        .col-7 {
+
+        }
+        .form-control{
+            margin-bottom:15px;
+        }
+        [type=submit]:not(:disabled), button:not(:disabled) {
+            cursor: pointer;
+            margin-left:195px;
+            margin-top:20px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-2">
+            <p><a class="btn btn-outline-success" href="/">
+                <i class="bi bi-arrow-left-square-fill"></i> Back</a>
+            </p>
+        </div>
+        <div class="col-6">
+            <h1>Edit Todo Item</h1>
+            <form class="row g-3" action="#" th:action="@{/todo/{id}(id=${todo.id})}" th:object="${todo}" method="POST">
+                <div class="form-group">
+                    <div class="col-6">
+                        <label for="description"></label>
+                        <input class="form-control"
+                               type="text"
+                               th:field="*{description}"
+                               id="description"
+                               placeholder="Description"
+                        >
+                    </div>
+                    <div class="col-6 form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               id="inputComplete"
+                               th:field="*{complete}"
+                               th:checked="${complete} == true">
+                        <label class="form-check-label" for="inputComplete">
+                            Completed?
+                        </label>
+                    </div>
+
+                    <input type="hidden" th:field="*{created_at}" />
+                    <input type="hidden" th:field="*{updated_at}" />
+
+                    <button type="submit" class="btn btn-outline-success">
+                        <i class="bi bi-plus-square-fill"></i> Update
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

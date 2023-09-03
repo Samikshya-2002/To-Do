@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" />
+     <title>Spring Boot TODO Application</title>
+
+    <style>
+        /* Add your custom CSS rules here */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            background-color:lightgray;
+            text-align: center;
+<!--            color: #333;-->
+        }
+
+        .container {
+            background-color: linen;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: black;
+        }
+
+        .alert-success {
+            background-color: #dff0d8;
+        }
+
+        .alert-warning {
+            background-color: #fcf8e3;
+        }
+        .btn {
+            padding: 5px 10px;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-outline-success {
+            border: 2px solid #28a745;
+            color: #28a745;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+             color: #fff;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>SPRING BOOT TODO APPLICATION</h1>
+        <hr />
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Actions</th>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Complete</th>
+                <th>Created</th>
+                <th>Updated</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${todoitems}" th:class="${item.complete} ? 'alert alert-success' : 'alert alert-warning'">
+                    <td>
+                        <div class="btn btn-group-sm" role="group">
+                            <a class="btn btn-info" th:href="@{/edit/{id}(id=${item.id})}">
+                                <i class="bi bi-pencil-fill"></i> Edit</a>
+                            <a class="btn btn-danger" th:href="@{/delete/{id}(id=${item.id})}">
+                                <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>
+                    </td>
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.description}"></td>
+                    <td>
+                        <span th:if="${item.complete}" th:text="Yes"></span>
+                        <span th:unless="${item.complete}" th:text="No"></span>
+                    </td>
+                    <td th:text="${item.created_at}"></td>
+                    <td th:text="${item.updated_at}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            <a class="btn btn-outline-success" href="/create-todo">
+                <i class="bi bi-plus-square-fill"></i>Create ToDo
+            </a>
+        </p>
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
